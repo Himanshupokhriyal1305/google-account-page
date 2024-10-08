@@ -75,6 +75,7 @@ export default function Header() {
 import React from 'react'
 import { useState } from 'react'
 import { useTranslation } from "next-i18next";
+import Accordion from './Accordian';
 
 
 
@@ -86,55 +87,37 @@ function Index() {
   const { t } = useTranslation("header");
 
   console.log(t('sHead'));
-  
 
-  const [sculptureList, setSculptureList] = useState([{
 
-    head: t('sHead'),
-    description: t('sDes'),
-    showMore: false,
-
-  },
-  {
-
-    head: t('sHead'),
-    description:t('sDes'),
-    showMore: false,
-
-  },
-  {
-
-    head: t('sHead'),
-    description: t('sDes'),
-    showMore: false,
-
-  },
-  {
-
-    head: t('sHead'),
-    description: t('sDes'),
-    showMore: false,
-
-  }
+  const [sculptureList, setSculptureList] = useState([
+    {
+      heading: "What is Snaptik?",
+      content: "Snaptik is a free tool that lets you download TikTok videos without a watermark in MP4 format and in HD, Full HD, or 4K quality. No installation required; just paste the link."
+    },
+    {
+      heading: "Why Use Snaptik?",
+      content: "Snaptik is easy to use and completely free. No sign-up needed, and you can download unlimited videos."
+    },
+    // Add other sections here based on the JSON structure
   ])
 
-  function handleMoreClick(el: object,index:number) {
-    // setShowMore(!showMore);
-    let newSculptureList = [...sculptureList]
-    
-    newSculptureList.map((e,i) => {
-        if(i==index){
-          newSculptureList.splice(i,1,{
-            ...e,showMore:true
-          })
-        } else{
-          newSculptureList.splice(i,1,{
-            ...e,showMore:false
-          })
-        }
-    })
-    setSculptureList(newSculptureList)
-  }
+  // function handleMoreClick(el: object, index: number) {
+  //   // setShowMore(!showMore);
+  //   let newSculptureList = [...sculptureList]
+
+  //   newSculptureList.map((e, i) => {
+  //     if (i == index) {
+  //       newSculptureList.splice(i, 1, {
+  //         ...e, showMore: true
+  //       })
+  //     } else {
+  //       newSculptureList.splice(i, 1, {
+  //         ...e, showMore: false
+  //       })
+  //     }
+  //   })
+  //   setSculptureList(newSculptureList)
+  // }
 
 
 
@@ -143,18 +126,7 @@ function Index() {
   let sculpture = sculptureList[index];
 
 
-  function handleHide(el: object,index:number){
-    let newSculptureList = [...sculptureList]
-    
-    newSculptureList.map((e,i) => {
-        if(i==index){
-          newSculptureList.splice(i,1,{
-            ...e,showMore:false
-          })
-        }
-    })
-    setSculptureList(newSculptureList)
-  }
+ 
   return (
     <>
       <div className="grid grid-cols-1 gap-10 mt-[200px] ml-[40px]">
@@ -183,11 +155,11 @@ function Index() {
         </div>
       </div>
 
-      <div className='grid grid-cols-1 gap-10 mt-[80px]'>
+      {/* <div className='grid grid-cols-1 gap-10 mt-[80px]'> */}
 
 
 
-        {sculptureList.map((el, i) => {
+        {/* {sculptureList.map((el, i) => {
           return (
             <>
               <button className='border-1 border-red-600' onClick={(e) =>{if(el.showMore){handleHide(el,i)}else{ handleMoreClick(el,i)}}}>
@@ -196,7 +168,9 @@ function Index() {
               {el.showMore && <p>{el.description}</p>}
             </>
           )
-        })}
+        })} */}
+
+        <Accordion  />
         {/* <button className='border-1 border-red-600' onClick={handleMoreClick}>
         {showMore ? 'Hide' : 'HOW TO DOWNLOAD VIDEO TIKTOK WITH NO WATERMARK'} details
       </button>
@@ -225,7 +199,7 @@ function Index() {
 
 
 
-      </div>
+      {/* </div> */}
 
 
 
