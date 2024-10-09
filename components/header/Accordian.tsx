@@ -2,24 +2,31 @@
 
 import { useState } from 'react';
 
-const AccordionItem = ({ title, content }: { title: string; content: JSX.Element }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const AccordionItem = ({
+  title,
+  content,
+  isOpen,
+  onToggle,
+}: {
+  title: string;
+  content: JSX.Element;
+  isOpen: boolean;
+  onToggle: () => void;
+}) => {
   return (
-    <div className="border mt-10">
-      <div
-        className="flex p-4 cursor-pointer"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <h2 className="font-bold text-xl">{title}</h2>
-      
+    <div className="accordion-item border mt-2 md:mt-4 overflow-hidden">
+      <div className="accordion-header flex justify-between p-4 cursor-pointer" onClick={onToggle}>
+        <h2 className="accordion-title font-bold text-lg md:text-xl">{title}</h2>
       </div>
-      {isOpen && <div className="p-4">{content}</div>}
+      {isOpen && <div className={`accordion-content p-4 transition-height duration-300 ease-in-out ${
+          isOpen ? 'max-h-96' : 'max-h-0'
+        } overflow-hidden`}>{content}</div>}
     </div>
   );
 };
 
 const Accordion = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const items = [
     {
       title: 'Snaptik: TikTok Video Downloader Without Watermark',
@@ -219,13 +226,24 @@ const Accordion = () => {
     },
   ];
 
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
   return (
-    <div className="gap-10 ml-[40px]">
-      {items.map((item, index) => (
-        <AccordionItem key={index} title={item.title} content={item.content} />
+    <div className="accordion gap-4 md:gap-6 mx-4 md:mx-10">
+            {items.map((item, index) => (
+        <AccordionItem
+          key={index}
+          title={item.title}
+          content={item.content}
+          isOpen={openIndex === index}
+          onToggle={() => handleToggle(index)}
+        />
       ))}
+
     </div>
   );
 };
+
 
 export default Accordion;
