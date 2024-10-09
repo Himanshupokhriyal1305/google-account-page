@@ -80,11 +80,11 @@ export default function HeroContainer() {
 const videoDownloader = async (url: string) => {
   const options = {
     method: 'GET',
-    url: 'https://tiktok-video-downloader-api.p.rapidapi.com/media',
+    url: 'https://tiktok-api23.p.rapidapi.com/api/user/popular-posts?secUid=MS4wLjABAAAAqB08cUbXaDWqbD6MCga2RbGTuhfO2EsHayBYx08NDrN7IE3jQuRDNNN6YwyfH6_6&count=35&cursor=0',
     params: { videoUrl: url }, // Use dynamic URL here
     headers: {
-      'x-rapidapi-key': 'c2b1e14d8dmsh5a0625c627ca0ffp166217jsn9e18e9b84fec',
-      'x-rapidapi-host': 'tiktok-video-downloader-api.p.rapidapi.com'
+      'x-rapidapi-host': 'tiktok-api23.p.rapidapi.com' ,
+	    'x-rapidapi-key': '1865ac576dmsh080f65d8aa868e6p1a897fjsnf3e099ed908b'
     }
   };
 
